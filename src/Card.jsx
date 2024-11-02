@@ -12,23 +12,23 @@ import { useRef } from "react";
 const Card = () => {
   const [apiCalls, setApiCalls] = useState([]);
   const inputRef = useRef();
-  const city = ""
+  const city = "";
   const allIcons = {
-      "01d": clear,
-      "01n": clear,
-      "02d": cloud,
-      "02n": cloud,
-      "03d": cloud,
-      "03n": cloud,
-      "04d": drizzle,
-      "04n": drizzle,
-      "09d": rain,
-      "09n": rain,
-      "010d": rain,
-      "010n": rain,
-      "013d": snow,
-      "013n": snow,
-  }
+    "01d": clear,
+    "01n": clear,
+    "02d": cloud,
+    "02n": cloud,
+    "03d": cloud,
+    "03n": cloud,
+    "04d": drizzle,
+    "04n": drizzle,
+    "09d": rain,
+    "09n": rain,
+    "010d": rain,
+    "010n": rain,
+    "013d": snow,
+    "013n": snow,
+  };
 
   const fetchData = async (city) => {
     try {
@@ -43,7 +43,7 @@ const Card = () => {
         windSpeed: apiCall.wind.speed,
         temperature: Math.floor(apiCall.main.temp),
         location: apiCall.name,
-        icon:icon
+        icon: icon,
       });
 
       if (!apiCall.weather || !apiCall.weather.length) {
@@ -65,13 +65,11 @@ const Card = () => {
   };
 
   useEffect(() => {
-    
-
     fetchData(city); // Appeler fetchData lorsque la ville change
-  }, []);
+  }, [apiCalls.city]);
 
   return (
-                //  {/* Conteneur de l'app */}
+    //  {/* Conteneur de l'app */}
     <div className="bg-indigo-600 place-self-center w-11/12 max-w-md flex flex-col px-7 min-h-[100px] rounded-3xl">
       <h1 className="text-4xl font-bold text-white flex items-center justify-center">
         Weather
@@ -95,81 +93,46 @@ const Card = () => {
 
       {/* Après la barre de recherche */}
 
-          {/* {apiCalls.humidity == undefined} ? (<p>AUCUNE DONNEE</p>) : (<div className="flex flex-col  items-center justify-center">
-        <img src={apiCalls.icon} alt="" className=" w-52" />
-        <p className="text-7xl text-white font-semi-bold bg-blue-800 px-1">
-          {apiCalls.temperature}°C
-        </p>
-        <p className="text-white text-3xl font-semibold pt-2">
-          {apiCalls.location}
-        </p>
+      <div>
+        {apiCalls.humidity === undefined ? (
+          <p className="text-white text-2xl font-semibold flex justify-center py-8 items-center">
+            AUCUNE DONNEE
+          </p>
+        ) : (
+          <>
+            <div className="flex flex-col items-center justify-center">
+              <img src={apiCalls.icon} alt="" className="w-52" />
+              <p className="text-7xl text-white font-semi-bold bg-blue-800 px-1">
+                {apiCalls.temperature}°C
+              </p>
+              <p className="text-white text-3xl font-semibold pt-2">
+                {apiCalls.location}
+              </p>
+            </div>
+            <div className="relative flex justify-evenly mt-2 pl-16">
+              <div>
+                <img src={humidity} alt="" className="w-7 h-7 mt-1" />
+                <span className="mt-1 pl-7 text-white">Humidity</span>
+              </div>
+              <span className="absolute left-36 top-1 text-white">
+                {apiCalls.humidity}%
+              </span>
+
+              <div>
+                <img src={wind} alt="" className="w-9 h-9" />
+                <span className="pl-7 text-white">Wind Speed</span>
+              </div>
+              <span className="absolute right-11 top-1 text-white">
+                {apiCalls.windSpeed}km/h
+              </span>
+            </div>
+          </>
+        )}
       </div>
-      <div className="relative flex justify-evenly mt-2 pl-16">
-        <div>
-          <img src={humidity} alt="" className="w-7 h-7 mt-1" />
-          <span className="mt-1 pl-7 text-white">Humidity</span>
-        </div>
-        <span className="absolute left-36 top-1 text-white">
-          {apiCalls.humidity}%
-        </span>
-
-        <div>
-          <img src={wind} alt="" className="w-9 h-9" />
-          <span className=" pl-7 text-white">Wind Speed</span>
-        </div>
-        <span className="absolute right-11 top-1 text-white">
-          {apiCalls.windSpeed}km/h
-        </span>
-      </div>) */}
-
-<div>
-{apiCalls.humidity === undefined ? (
-    <p className="text-white text-2xl font-semibold flex justify-center py-8 items-center">AUCUNE DONNEE</p>
-  ) : (
-    <>
-<div className="flex flex-col items-center justify-center">
-  
-      <img src={apiCalls.icon} alt="" className="w-52" />
-      <p className="text-7xl text-white font-semi-bold bg-blue-800 px-1">
-        {apiCalls.temperature}°C
-      </p>
-      <p className="text-white text-3xl font-semibold pt-2">
-        {apiCalls.location}
-      </p>
-   
-  
-</div>
-<div className="relative flex justify-evenly mt-2 pl-16">
-  <div>
-    <img src={humidity} alt="" className="w-7 h-7 mt-1" />
-    <span className="mt-1 pl-7 text-white">Humidity</span>
-  </div>
-  <span className="absolute left-36 top-1 text-white">
-    {apiCalls.humidity}%
-  </span>
-
-  <div>
-    <img src={wind} alt="" className="w-9 h-9" />
-    <span className="pl-7 text-white">Wind Speed</span>
-  </div>
-  <span className="absolute right-11 top-1 text-white">
-    {apiCalls.windSpeed}km/h
-  </span>
-</div>
-</>
-  )}
-</div>
-
-
-
 
       {/* Liste déroulante pour changer de langue */}
       <div className="flex justify-start mt-4">
-        <select
-          // value={language}
-          // onChange={changeLanguage}
-          className="bg-white text-black rounded px-2 w-28 h-6"
-        >
+        <select className="bg-white text-black rounded px-2 w-28 h-6">
           <option value="fr">Français</option>
           <option value="en">English</option>
           <option value="es">Español</option>
