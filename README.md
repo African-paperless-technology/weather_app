@@ -23,16 +23,16 @@ Pour installer et exécuter l'application, suivez ces étapes :
 
 1. Clonez le dépôt :
    ```bash
-   git clone https://github.com/votre-utilisateur/nom-du-repo.git
+   git clone https://github.com/votre-utilisateur/weather_app.git
 
 2. Accédez au dossier du projet :
-    cd nom-du-repo
+    cd weather_app
    
 3. Installez les dépendances :
     npm install
    
 4.Lancez l'application :
-    npm start
+    npm run dev
 
     
 UTILISATION
