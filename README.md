@@ -15,7 +15,7 @@ Cette application météo interactive permet aux utilisateurs de consulter les c
 
 - **React** : Pour la création de l'interface utilisateur dynamique.
 - **API OpenWeatherMap** : Pour récupérer les données météorologiques en temps réel.
-- **CSS** : Pour le style et la mise en page de l'application.
+- **Tailwind css** : Pour le style et la mise en page de l'application.
 
 ## Installation
 
